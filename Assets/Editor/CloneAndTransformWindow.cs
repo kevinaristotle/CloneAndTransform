@@ -72,7 +72,7 @@ public class CloneAndTransformWindow : EditorWindow
 
                 Vector3 cloneTranslation = pivotGameObject.transform.localPosition;
                 Vector3 cloneRotation = pivotGameObject.transform.localRotation.eulerAngles;
-                Vector3 cloneScale = Vector3.Scale(pivotGameObject.transform.localScale, scale);
+                Vector3 cloneScale = scale;
 
                 cloneTranslation += translate * i;
                 cloneRotation += rotate * i;
@@ -86,7 +86,7 @@ public class CloneAndTransformWindow : EditorWindow
                 clone.transform.parent = pivotGameObject.transform;
                 pivotGameObject.transform.localPosition = cloneTranslation;
                 pivotGameObject.transform.localEulerAngles = cloneRotation;
-                pivotGameObject.transform.localScale = cloneScale;
+                pivotGameObject.transform.localScale = Vector3.Scale(pivotGameObject.transform.localScale, cloneScale);
                 clone.transform.parent = targetObject.transform.parent;
                 clone.transform.hideFlags = HideFlags.None;
                 Undo.RegisterCreatedObjectUndo(clone, undoName);
